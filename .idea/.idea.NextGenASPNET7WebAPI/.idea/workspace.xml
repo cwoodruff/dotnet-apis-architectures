@@ -20,13 +20,19 @@
     <projectFile profileName="http">Chinook.gRPC/Chinook.gRPC.csproj</projectFile>
     <projectFile profileName="https">Chinook.gRPC/Chinook.gRPC.csproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a29b76c2-c37c-4d66-bd81-03bef1520d52" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.dotnet-apis-architectures/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.dotnet-apis-architectures/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.dotnet-apis-architectures/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.dotnet-apis-architectures/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.dotnet-apis-architectures/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.NextGenASPNET7WebAPI/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.NextGenASPNET7WebAPI/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chinook.Domain/Profiles/MapperConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NextGenASPNET7WebAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NextGenASPNET7WebAPI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chinook.Domain/Chinook.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chinook.Domain/Chinook.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chinook.WebAPI/Chinook.WebAPI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Chinook.WebAPI/Chinook.WebAPI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chinook.WebAPI/Configurations/ServicesConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chinook.WebAPI/Configurations/ServicesConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chinook.WebAPI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chinook.WebAPI/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +45,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2aDKRfgX1TLIHKubTAzYIywr7nO" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -67,6 +73,9 @@
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver"
+    ],
     "rider.external.source.directories": [
       "/Users/cwoodruff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
       "/Users/cwoodruff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",

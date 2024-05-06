@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using AutoMapper.EquivalencyExpression;
+using Chinook.Domain.Profiles;
 
 namespace Chinook.WebAPI.Configurations;
 
@@ -149,6 +151,14 @@ public static class ServicesConfiguration
 
         services.AddScoped<RepresentationEnricher>();
         services.AddScoped<ListRepresentationEnricher>();
+    }
+    
+    public static void AddAutoMapperConfig(this IServiceCollection services)
+    {
+        services.AddAutoMapper((serviceProvider, automapper) =>
+        {
+            automapper.AddCollectionMappers();
+        }, typeof(MapperConfig));
     }
 }
 

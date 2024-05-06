@@ -18,6 +18,8 @@ builder.Services.AddApiExplorer();
 builder.Services.AddSwaggerServices();
 builder.Services.AddProblemDetail();
 builder.Services.AddRepresentations();
+builder.Services.AddAutoMapperConfig();
+
 
 builder.Services.AddControllers(cfg => { cfg.Filters.Add<RepresentationEnricher>(); });
 
