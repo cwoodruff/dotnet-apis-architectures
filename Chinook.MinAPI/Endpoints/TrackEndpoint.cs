@@ -2,51 +2,54 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Api;
+namespace Chinook.MinAPI.Endpoints;
 
-public static class TrackApi
+public static class TrackEndpoint
 {
-    public static void RegisterApis(WebApplication app)
+    public static void MapTrackEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/Track",
+        var group = app.MapGroup("api/Track")
+            .RequireCors();
+
+        group.MapGet("",
             async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllTrack(page, pageSize)).WithName("GetTracks")
             .WithOpenApi();
 
-        app.MapGet("/Track/{id}", async (int? id, IChinookSupervisor db) => await db.GetTrackById(id)).WithName("GetTrack")
+        group.MapGet("{id}", async (int? id, IChinookSupervisor db) => await db.GetTrackById(id)).WithName("GetTrack")
             .WithOpenApi();
 
-        app.MapPost("/Track/",
+        group.MapPost("",
             async ([FromBody] TrackApiModel track, IChinookSupervisor db) => await db.AddTrack(track)).WithName("AddTrack")
             .WithOpenApi();
 
-        app.MapPut("/Track/",
+        group.MapPut("",
             async ([FromBody] TrackApiModel track, IChinookSupervisor db) => await db.UpdateTrack(track)).WithName("UpdateTrack")
             .WithOpenApi();
 
-        app.MapDelete("/Track/{id}", async (int id, IChinookSupervisor db) => await db.DeleteTrack(id)).WithName("DeleteTrack")
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteTrack(id)).WithName("DeleteTrack")
             .WithOpenApi();
 
-        app.MapGet("/Track/Artist/{id}",
+        group.MapGet("Artist/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetTrackByArtistId(id, page, pageSize)).WithName("GetTracksForArtist")
             .WithOpenApi();
 
-        app.MapGet("/Track/Album/{id}",
+        group.MapGet("Album/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetTrackByAlbumId(id, page, pageSize)).WithName("GetTracksForAlbum")
             .WithOpenApi();
 
-        app.MapGet("/Track/Genre/{id}",
+        group.MapGet("Genre/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetTrackByGenreId(id, page, pageSize)).WithName("GetTracksForGenre")
             .WithOpenApi();
 
-        app.MapGet("/Track/Invoice/{id}",
+        group.MapGet("Invoice/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetTrackByInvoiceId(id, page, pageSize)).WithName("GetTracksForInvoice")
             .WithOpenApi();
 
-        app.MapGet("/Track/MediaType/{id}",
+        group.MapGet("MediaType/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetTrackByMediaTypeId(id, page, pageSize)).WithName("GetTracksForMediaType")
             .WithOpenApi();

@@ -2,28 +2,31 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Api;
+namespace Chinook.MinAPI.Endpoints;
 
-public static class ArtistApi
+public static class ArtistEndpoint
 {
-    public static void RegisterApis(WebApplication app)
+    public static void MapArtistEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/Artist",
+        var group = app.MapGroup("api/Artists")
+            .RequireCors();
+        
+        group.MapGet("",
             async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllAlbum(page, pageSize)).WithName("GetArtists")
             .WithOpenApi();
 
-        app.MapGet("/Artist/{id}", async (int id, IChinookSupervisor db) => await db.GetArtistById(id)).WithName("GetArtist")
+        group.MapGet("{id}", async (int id, IChinookSupervisor db) => await db.GetArtistById(id)).WithName("GetArtist")
             .WithOpenApi();
 
-        app.MapPost("/Artist/",
+        group.MapPost("",
             async ([FromBody] ArtistApiModel artist, IChinookSupervisor db) => await db.AddArtist(artist)).WithName("AddArtist")
             .WithOpenApi();
 
-        app.MapPut("/Artist/",
+        group.MapPut("",
             async ([FromBody] ArtistApiModel artist, IChinookSupervisor db) => await db.UpdateArtist(artist)).WithName("UpdateArtist")
             .WithOpenApi();
 
-        app.MapDelete("/Artist/{id}", async (int id, IChinookSupervisor db) => await db.DeleteArtist(id)).WithName("DeleteArtist")
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteArtist(id)).WithName("DeleteArtist")
             .WithOpenApi();
     }
 }

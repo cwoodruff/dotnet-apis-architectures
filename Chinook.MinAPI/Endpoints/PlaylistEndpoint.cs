@@ -2,28 +2,31 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Api;
+namespace Chinook.MinAPI.Endpoints;
 
-public static class PlaylistApi
+public static class PlaylistEndpoint
 {
-    public static void RegisterApis(WebApplication app)
+    public static void MapPlaylistEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/Playlist",
+        var group = app.MapGroup("api/Playlist")
+            .RequireCors();
+
+        group.MapGet("",
             async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllPlaylist(page, pageSize)).WithName("GetPlaylists")
             .WithOpenApi();
 
-        app.MapGet("/Playlist/{id}", async (int id, IChinookSupervisor db) => await db.GetPlaylistById(id)).WithName("GetPlaylist")
+        group.MapGet("{id}", async (int id, IChinookSupervisor db) => await db.GetPlaylistById(id)).WithName("GetPlaylist")
             .WithOpenApi();
 
-        app.MapPost("/Playlist/",
+        group.MapPost("",
             async ([FromBody] PlaylistApiModel playlist, IChinookSupervisor db) => await db.AddPlaylist(playlist)).WithName("AddPlaylist")
             .WithOpenApi();
 
-        app.MapPut("/Playlist/",
+        group.MapPut("",
             async ([FromBody] PlaylistApiModel playlist, IChinookSupervisor db) => await db.UpdatePlaylist(playlist)).WithName("UpdatePlaylist")
             .WithOpenApi();
 
-        app.MapDelete("/Playlist/{id}", async (int id, IChinookSupervisor db) => await db.DeletePlaylist(id)).WithName("DeletePlaylist")
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeletePlaylist(id)).WithName("DeletePlaylist")
             .WithOpenApi();
     }
 }

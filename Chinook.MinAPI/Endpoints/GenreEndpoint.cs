@@ -2,28 +2,31 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Api;
+namespace Chinook.MinAPI.Endpoints;
 
-public static class GenreApi
+public static class GenreEndpoint
 {
-    public static void RegisterApis(WebApplication app)
+    public static void MapGenreEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/Genre",
+        var group = app.MapGroup("api/Genre")
+            .RequireCors();
+
+        group.MapGet("",
             async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllGenre(page, pageSize)).WithName("GetGenres")
             .WithOpenApi();
 
-        app.MapGet("/Genre/{id}", async (int? id, IChinookSupervisor db) => await db.GetGenreById(id)).WithName("GetGenre")
+        group.MapGet("{id}", async (int? id, IChinookSupervisor db) => await db.GetGenreById(id)).WithName("GetGenre")
             .WithOpenApi();
 
-        app.MapPost("/Genre/",
+        group.MapPost("",
             async ([FromBody] GenreApiModel genre, IChinookSupervisor db) => await db.AddGenre(genre)).WithName("AddGenre")
             .WithOpenApi();
 
-        app.MapPut("/Genre/",
+        group.MapPut("",
             async ([FromBody] GenreApiModel genre, IChinookSupervisor db) => await db.UpdateGenre(genre)).WithName("UpdateGenre")
             .WithOpenApi();
 
-        app.MapDelete("/Genre/{id}", async (int id, IChinookSupervisor db) => await db.DeleteGenre(id)).WithName("DeleteGenre")
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteGenre(id)).WithName("DeleteGenre")
             .WithOpenApi();
     }
 }

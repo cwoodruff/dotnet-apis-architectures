@@ -2,31 +2,34 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Api;
+namespace Chinook.MinAPI.Endpoints;
 
-public static class CustomerApi
+public static class CustomerEndpoint
 {
-    public static void RegisterApis(WebApplication app)
+    public static void MapCustomerEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/Customer",
+        var group = app.MapGroup("api/Customers")
+            .RequireCors();
+        
+        group.MapGet("",
             async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllCustomer(page, pageSize)).WithName("GetCustomers")
             .WithOpenApi();
 
-        app.MapGet("/Customer/{id}", async (int id, IChinookSupervisor db) => await db.GetCustomerById(id)).WithName("GetCustomer")
+        group.MapGet("{id}", async (int id, IChinookSupervisor db) => await db.GetCustomerById(id)).WithName("GetCustomer")
             .WithOpenApi();
 
-        app.MapPost("/Customer/",
+        group.MapPost("",
             async ([FromBody] CustomerApiModel customer, IChinookSupervisor db) => await db.AddCustomer(customer)).WithName("AddCustomer")
             .WithOpenApi();
 
-        app.MapPut("/Customer/",
+        group.MapPut("",
             async ([FromBody] CustomerApiModel customer, IChinookSupervisor db) => await db.UpdateCustomer(customer)).WithName("UpdateCustomer")
             .WithOpenApi();
 
-        app.MapDelete("/Customer/{id}", async (int id, IChinookSupervisor db) => await db.DeleteCustomer(id)).WithName("DeleteCustomer")
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteCustomer(id)).WithName("DeleteCustomer")
             .WithOpenApi();
 
-        app.MapGet("/Customer/SupportRep/{id}",
+        group.MapGet("SupportRep/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetCustomerBySupportRepId(id, page, pageSize)).WithName("GetCustomersForSupportRep")
             .WithOpenApi();

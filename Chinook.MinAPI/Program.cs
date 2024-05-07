@@ -1,5 +1,5 @@
-using Chinook.MinAPI.Api;
 using Chinook.MinAPI.Bootstrapper;
+using Chinook.MinAPI.Endpoints;
 
 var app = AppBuilder.GetApp(args);
 
@@ -7,16 +7,16 @@ var app = AppBuilder.GetApp(args);
 RequestPipelineBuilder.Configure(app);
 
 // Configure APIs 
-AlbumApi.RegisterApis(app);
-ArtistApi.RegisterApis(app);
-CustomerApi.RegisterApis(app);
-EmployeeApi.RegisterApis(app);
-GenreApi.RegisterApis(app);
-InvoiceApi.RegisterApis(app);
-InvoiceLineApi.RegisterApis(app);
-MediaType.RegisterApis(app);
-PlaylistApi.RegisterApis(app);
-TrackApi.RegisterApis(app);
+app.MapAlbumEndpoints();
+app.MapArtistEndpoints();
+app.MapCustomerEndpoints();
+app.MapEmployeeEndpoints();
+app.MapGenreEndpoints();
+app.MapInvoiceEndpoints();
+app.MapInvoiceLineEndpoints();
+app.MapMediaTypeEndpoints();
+app.MapPlaylistEndpoints();
+app.MapTrackEndpoints();
 
 // Start the app
 app.Run();

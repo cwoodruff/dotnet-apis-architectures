@@ -2,36 +2,39 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Api;
+namespace Chinook.MinAPI.Endpoints;
 
-public static class InvoiceApi
+public static class InvoiceEndpoint
 {
-    public static void RegisterApis(WebApplication app)
+    public static void MapInvoiceEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/Invoice",
+        var group = app.MapGroup("api/Invoice")
+            .RequireCors();
+
+        group.MapGet("",
             async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllInvoice(page, pageSize)).WithName("GetInvoices")
             .WithOpenApi();
 
-        app.MapGet("/Invoice/{id}", async (int? id, IChinookSupervisor db) => await db.GetInvoiceById(id)).WithName("GetInvoice")
+        group.MapGet("{id}", async (int? id, IChinookSupervisor db) => await db.GetInvoiceById(id)).WithName("GetInvoice")
             .WithOpenApi();
 
-        app.MapPost("/Invoice/",
+        group.MapPost("",
             async ([FromBody] InvoiceApiModel invoice, IChinookSupervisor db) => await db.AddInvoice(invoice)).WithName("AddInvoice")
             .WithOpenApi();
 
-        app.MapPut("/Invoice/",
+        group.MapPut("",
             async ([FromBody] InvoiceApiModel invoice, IChinookSupervisor db) => await db.UpdateInvoice(invoice)).WithName("UpdateInvoice")
             .WithOpenApi();
 
-        app.MapDelete("/Invoice/{id}", async (int id, IChinookSupervisor db) => await db.DeleteInvoice(id)).WithName("DeleteInvoice")
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteInvoice(id)).WithName("DeleteInvoice")
             .WithOpenApi();
 
-        app.MapGet("/Invoice/Customer/{id}",
+        group.MapGet("Customer/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetInvoiceByCustomerId(id, page, pageSize)).WithName("GetInvoicesForCustomer")
             .WithOpenApi();
 
-        app.MapGet("/Invoice/Employee/{id}",
+        group.MapGet("Employee/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
                 await db.GetInvoiceByEmployeeId(id, page, pageSize)).WithName("GetInvoicesForEmployee")
             .WithOpenApi();

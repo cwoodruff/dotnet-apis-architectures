@@ -2,35 +2,38 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Api;
+namespace Chinook.MinAPI.Endpoints;
 
-public static class EmployeeApi
+public static class EmployeeEndpoint
 {
-    public static void RegisterApis(WebApplication app)
+    public static void MapEmployeeEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/Employee",
+        var group = app.MapGroup("api/Employee")
+            .RequireCors();
+
+        group.MapGet("",
             async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllEmployee(page, pageSize)).WithName("GetEmployees")
             .WithOpenApi();
 
-        app.MapGet("/Employee/{id}", async (int? id, IChinookSupervisor db) => await db.GetEmployeeById(id)).WithName("GetEmployee")
+        group.MapGet("{id}", async (int? id, IChinookSupervisor db) => await db.GetEmployeeById(id)).WithName("GetEmployee")
             .WithOpenApi();
 
-        app.MapPost("/Employee/",
+        group.MapPost("",
             async ([FromBody] EmployeeApiModel employee, IChinookSupervisor db) => await db.AddEmployee(employee)).WithName("AddEmployee")
             .WithOpenApi();
 
-        app.MapPut("/Employee/",
+        group.MapPut("",
             async ([FromBody] EmployeeApiModel employee, IChinookSupervisor db) => await db.UpdateEmployee(employee)).WithName("UpdateEmployee")
             .WithOpenApi();
 
-        app.MapDelete("/Employee/{id}", async (int id, IChinookSupervisor db) => await db.DeleteEmployee(id)).WithName("DeleteEmployee")
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteEmployee(id)).WithName("DeleteEmployee")
             .WithOpenApi();
 
-        app.MapGet("/Employee/directreports/{id}",
+        group.MapGet("directreports/{id}",
             async (int id, IChinookSupervisor db) => await db.GetEmployeeDirectReports(id)).WithName("GetEmployeeDirectReports")
             .WithOpenApi();
 
-        app.MapGet("/Employee/reportsto/{id}",
+        group.MapGet("reportsto/{id}",
             async (int id, IChinookSupervisor db) => await db.GetEmployeeReportsTo(id)).WithName("GetEmployeeDirectReport")
             .WithOpenApi();
     }
