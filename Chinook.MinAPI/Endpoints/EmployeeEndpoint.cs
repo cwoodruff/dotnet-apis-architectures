@@ -9,32 +9,25 @@ public static class EmployeeEndpoint
     public static void MapEmployeeEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("api/Employee")
-            .RequireCors();
+            .WithOpenApi();
 
         group.MapGet("",
-            async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllEmployee(page, pageSize)).WithName("GetEmployees")
-            .WithOpenApi();
+            async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllEmployee(page, pageSize)).WithName("GetEmployees");
 
-        group.MapGet("{id}", async (int? id, IChinookSupervisor db) => await db.GetEmployeeById(id)).WithName("GetEmployee")
-            .WithOpenApi();
+        group.MapGet("{id}", async (int? id, IChinookSupervisor db) => await db.GetEmployeeById(id)).WithName("GetEmployee");
 
         group.MapPost("",
-            async ([FromBody] EmployeeApiModel employee, IChinookSupervisor db) => await db.AddEmployee(employee)).WithName("AddEmployee")
-            .WithOpenApi();
+            async ([FromBody] EmployeeApiModel employee, IChinookSupervisor db) => await db.AddEmployee(employee)).WithName("AddEmployee");
 
         group.MapPut("",
-            async ([FromBody] EmployeeApiModel employee, IChinookSupervisor db) => await db.UpdateEmployee(employee)).WithName("UpdateEmployee")
-            .WithOpenApi();
+            async ([FromBody] EmployeeApiModel employee, IChinookSupervisor db) => await db.UpdateEmployee(employee)).WithName("UpdateEmployee");
 
-        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteEmployee(id)).WithName("DeleteEmployee")
-            .WithOpenApi();
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteEmployee(id)).WithName("DeleteEmployee");
 
         group.MapGet("directreports/{id}",
-            async (int id, IChinookSupervisor db) => await db.GetEmployeeDirectReports(id)).WithName("GetEmployeeDirectReports")
-            .WithOpenApi();
+            async (int id, IChinookSupervisor db) => await db.GetEmployeeDirectReports(id)).WithName("GetEmployeeDirectReports");
 
         group.MapGet("reportsto/{id}",
-            async (int id, IChinookSupervisor db) => await db.GetEmployeeReportsTo(id)).WithName("GetEmployeeDirectReport")
-            .WithOpenApi();
+            async (int id, IChinookSupervisor db) => await db.GetEmployeeReportsTo(id)).WithName("GetEmployeeDirectReport");
     }
 }

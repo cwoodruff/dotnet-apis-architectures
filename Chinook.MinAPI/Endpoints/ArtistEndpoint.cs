@@ -9,24 +9,19 @@ public static class ArtistEndpoint
     public static void MapArtistEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("api/Artists")
-            .RequireCors();
+            .WithOpenApi();
         
         group.MapGet("",
-            async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllAlbum(page, pageSize)).WithName("GetArtists")
-            .WithOpenApi();
+            async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllAlbum(page, pageSize)).WithName("GetArtists");
 
-        group.MapGet("{id}", async (int id, IChinookSupervisor db) => await db.GetArtistById(id)).WithName("GetArtist")
-            .WithOpenApi();
+        group.MapGet("{id}", async (int id, IChinookSupervisor db) => await db.GetArtistById(id)).WithName("GetArtist");
 
         group.MapPost("",
-            async ([FromBody] ArtistApiModel artist, IChinookSupervisor db) => await db.AddArtist(artist)).WithName("AddArtist")
-            .WithOpenApi();
+            async ([FromBody] ArtistApiModel artist, IChinookSupervisor db) => await db.AddArtist(artist)).WithName("AddArtist");
 
         group.MapPut("",
-            async ([FromBody] ArtistApiModel artist, IChinookSupervisor db) => await db.UpdateArtist(artist)).WithName("UpdateArtist")
-            .WithOpenApi();
+            async ([FromBody] ArtistApiModel artist, IChinookSupervisor db) => await db.UpdateArtist(artist)).WithName("UpdateArtist");
 
-        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteArtist(id)).WithName("DeleteArtist")
-            .WithOpenApi();
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteArtist(id)).WithName("DeleteArtist");
     }
 }

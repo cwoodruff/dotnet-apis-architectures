@@ -9,29 +9,23 @@ public static class CustomerEndpoint
     public static void MapCustomerEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("api/Customers")
-            .RequireCors();
+            .WithOpenApi();
         
         group.MapGet("",
-            async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllCustomer(page, pageSize)).WithName("GetCustomers")
-            .WithOpenApi();
+            async (int page, int pageSize, IChinookSupervisor db) => await db.GetAllCustomer(page, pageSize)).WithName("GetCustomers");
 
-        group.MapGet("{id}", async (int id, IChinookSupervisor db) => await db.GetCustomerById(id)).WithName("GetCustomer")
-            .WithOpenApi();
+        group.MapGet("{id}", async (int id, IChinookSupervisor db) => await db.GetCustomerById(id)).WithName("GetCustomer");
 
         group.MapPost("",
-            async ([FromBody] CustomerApiModel customer, IChinookSupervisor db) => await db.AddCustomer(customer)).WithName("AddCustomer")
-            .WithOpenApi();
+            async ([FromBody] CustomerApiModel customer, IChinookSupervisor db) => await db.AddCustomer(customer)).WithName("AddCustomer");
 
         group.MapPut("",
-            async ([FromBody] CustomerApiModel customer, IChinookSupervisor db) => await db.UpdateCustomer(customer)).WithName("UpdateCustomer")
-            .WithOpenApi();
+            async ([FromBody] CustomerApiModel customer, IChinookSupervisor db) => await db.UpdateCustomer(customer)).WithName("UpdateCustomer");
 
-        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteCustomer(id)).WithName("DeleteCustomer")
-            .WithOpenApi();
+        group.MapDelete("{id}", async (int id, IChinookSupervisor db) => await db.DeleteCustomer(id)).WithName("DeleteCustomer");
 
         group.MapGet("SupportRep/{id}",
             async (int id, int page, int pageSize, IChinookSupervisor db) =>
-                await db.GetCustomerBySupportRepId(id, page, pageSize)).WithName("GetCustomersForSupportRep")
-            .WithOpenApi();
+                await db.GetCustomerBySupportRepId(id, page, pageSize)).WithName("GetCustomersForSupportRep");
     }
 }
