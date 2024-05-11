@@ -225,16 +225,20 @@ public class TrackController : ControllerBase
             if (tracks != null && !tracks.Any())
                 return StatusCode((int)HttpStatusCode.NotFound, "No Tracks Could Be Found for the Album");
 
-            var metadata = new
+            if (tracks != null)
             {
-                tracks.TotalCount,
-                tracks.PageSize,
-                tracks.CurrentPage,
-                tracks.TotalPages,
-                tracks.HasNext,
-                tracks.HasPrevious
-            };
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
+                var metadata = new
+                {
+                    tracks.TotalCount,
+                    tracks.PageSize,
+                    tracks.CurrentPage,
+                    tracks.TotalPages,
+                    tracks.HasNext,
+                    tracks.HasPrevious
+                };
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
+            }
+
             return Ok(tracks);
         }
         catch (Exception ex)

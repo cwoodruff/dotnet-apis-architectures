@@ -30,7 +30,7 @@ public partial class TrackApiModel : BaseApiModel, IConvertModel<Track>
     public virtual MediaTypeApiModel? MediaType { get; set; } = null!;
 
     public virtual ICollection<PlaylistApiModel> Playlists { get; set; } = new List<PlaylistApiModel>();
-    public string AlbumName { get; set; }
+    public string? AlbumName { get; set; }
     public string? MediaTypeName { get; set; }
     public string? GenreName { get; set; }
 
