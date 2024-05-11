@@ -44,7 +44,7 @@ public class GenreController : ControllerBase
                     genres.HasNext,
                     genres.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(genres);
             }
             else

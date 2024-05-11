@@ -44,7 +44,7 @@ public class EmployeeController : ControllerBase
                     employees.HasNext,
                     employees.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(employees);
             }
 

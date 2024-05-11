@@ -44,7 +44,7 @@ public class InvoiceLineController : ControllerBase
                     invoiceLines.HasNext,
                     invoiceLines.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(invoiceLines);
             }
 
@@ -174,7 +174,7 @@ public class InvoiceLineController : ControllerBase
                     invoiceLines.HasNext,
                     invoiceLines.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(invoiceLines);
             }
 
@@ -208,7 +208,7 @@ public class InvoiceLineController : ControllerBase
                     invoiceLines.HasNext,
                     invoiceLines.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(invoiceLines);
             }
 

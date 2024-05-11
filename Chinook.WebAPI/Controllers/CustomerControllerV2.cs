@@ -45,7 +45,7 @@ public partial class CustomerController : ControllerBase
                     customers.HasNext,
                     customers.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(customers);
             }
 

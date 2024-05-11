@@ -46,7 +46,7 @@ public class AlbumController : ControllerBase
                     albums.HasNext,
                     albums.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
 
 
                 return Ok(albums);
@@ -308,7 +308,7 @@ public class AlbumController : ControllerBase
                     albums.HasNext,
                     albums.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
 
                 return Ok(albums);
             }

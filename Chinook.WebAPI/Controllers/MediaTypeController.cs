@@ -45,7 +45,7 @@ public class MediaTypeController : ControllerBase
                     mediaTypes.HasNext,
                     mediaTypes.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(mediaTypes);
             }
 

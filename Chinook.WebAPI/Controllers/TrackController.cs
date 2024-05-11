@@ -45,7 +45,7 @@ public class TrackController : ControllerBase
                     tracks.HasNext,
                     tracks.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(tracks);
             }
 
@@ -165,7 +165,7 @@ public class TrackController : ControllerBase
                     tracks.HasNext,
                     tracks.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(tracks);
             }
 
@@ -199,7 +199,7 @@ public class TrackController : ControllerBase
                     tracks.HasNext,
                     tracks.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(tracks);
             }
 
@@ -234,7 +234,7 @@ public class TrackController : ControllerBase
                 tracks.HasNext,
                 tracks.HasPrevious
             };
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
             return Ok(tracks);
         }
         catch (Exception ex)
@@ -265,7 +265,7 @@ public class TrackController : ControllerBase
                     tracks.HasNext,
                     tracks.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(tracks);
             }
 
@@ -299,7 +299,7 @@ public class TrackController : ControllerBase
                     tracks.HasNext,
                     tracks.HasPrevious
                 };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metadata));
                 return Ok(tracks);
             }
 
