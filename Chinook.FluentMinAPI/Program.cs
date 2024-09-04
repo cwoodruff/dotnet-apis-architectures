@@ -1,5 +1,5 @@
 using Chinook.FluentMinAPI.Bootstrapper;
-using Chinook.MinAPI.Endpoints;
+using Chinook.FluentMinAPI.Endpoints;
 
 var app = AppBuilder.GetApp(args);
 
