@@ -2,7 +2,7 @@ using Chinook.Domain.ApiModels;
 using Chinook.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Chinook.MinAPI.Endpoints;
+namespace Chinook.FluentMinAPI.Endpoints;
 
 public static class PlaylistEndpoint
 {
