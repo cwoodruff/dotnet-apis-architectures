@@ -399,3 +399,4 @@ FodyWeavers.xsd
 .DS_Store
 /.idea
 .DS_Store
+/Chinook.Domain/.idea
